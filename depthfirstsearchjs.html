@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Binary Search Algorithm Using JavaScript</title>
+</head>
+<body>
+<script>
+// Program o f Javasript to print DFSearch traversal
+// from a given given graph
+
+// The below class represents a directed graph using
+// adjacency list representation
+class Graphs
+{
+	
+	// Constructor
+	constructor(v)
+	{
+		this.Vertex = v;
+		this.adjacency = new Array(v);
+		for(let i = 0; i < v; i++)
+			this.adjacency[i] = [];
+	}
+	
+	// Function to add an edge into the graph
+	addEdge(v, w)
+	{
+		
+		// Add w to v's list.
+		this.adjacency[v].push(w);
+	}
+	
+	// A function used by DFS
+	DFSearchUtil(v, visited)
+	{
+		
+		// Mark the current node as visited and print it
+		visited[v] = true;
+		document.write(v + " ");
+
+		// Recur for all the vertices adjacent to this
+		// vertex
+		for(let i of this.adjacency[v].values())
+		{
+			let n = i
+			if (!visited[n])
+				this.DFSearchUtil(n, visited);
+		}
+	}
+	
+	// The function to do DFS traversal.
+	// It uses recursive
+	// DFSUtil()
+	DFSearch(v)
+	{
+		
+		// Mark all the vertices as
+		// not visited(set as
+		// false by default in java)
+		let visited = new Array(this.Vertex);
+		for(let i = 0; i < this.Vertex; i++)
+			visited[i] = false;
+
+		// Call the recursive helper
+		// function to print DFS
+		// traversal
+		this.DFSearchUtil(v, visited);
+	}
+}
+
+// Driver Code
+g = new Graphs(4);
+
+g.addEdge(0, 1);
+g.addEdge(0, 2);
+g.addEdge(1, 2);
+g.addEdge(2, 0);
+g.addEdge(2, 3);
+g.addEdge(3, 3);
+
+document.write("Following is Depth First Traversal " +
+			"(starting from vertex 2)");
+
+g.DFSearch(2);
+</script>
